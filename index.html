@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário M2 - 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .aula-card {
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .aula-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .aula-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .aula-card:hover::before {
+            opacity: 1;
+        }
+
+        .aula-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+        }
+
+        .aula-date {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .aula-title {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+            line-height: 1.4;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .professor-info {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* Cores dos blocos */
+        .bloco-1 {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+        }
+
+        .bloco-2 {
+            background: linear-gradient(135deg, #4ECDC4, #44A08D);
+        }
+
+        .bloco-3 {
+            background: linear-gradient(135deg, #45B7D1, #96C93D);
+        }
+
+        .bloco-4 {
+            background: linear-gradient(135deg, #FFA726, #FF7043);
+        }
+
+        .bloco-5 {
+            background: linear-gradient(135deg, #AB47BC, #8E24AA);
+        }
+
+        .bloco-6 {
+            background: linear-gradient(135deg, #E91E63, #F06292);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #e74c3c;
+        }
+
+        .modal-header {
+            border-bottom: 3px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .modal-date {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            font-weight: 600;
+        }
+
+        .modal-professor {
+            font-size: 1.1rem;
+            color: #3498db;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .modal-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #34495e;
+            text-align: justify;
+        }
+
+        .modal-produto {
+            margin-top: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .modal-produto h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .modal-produto p {
+            color: #34495e;
+            margin: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-50px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .calendar-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Calendário M2 - 2025</h1>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color bloco-1"></div>
+                <span>Bloco 1 - Configuração e Ambiente</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color bloco-2"></div>
+                <span>Bloco 2 - Gestão da Qualidade</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color bloco-3"></div>
+                <span>Bloco 3 - Programação de Aplicativos</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color bloco-4"></div>
+                <span>Bloco 4 - Modelagem e Documentação</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color bloco-5"></div>
+                <span>Bloco 5 - Banco de Dados e CRUD</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color bloco-6"></div>
+                <span>Bloco 6 - Projeto Final</span>
+            </div>
+        </div>
+
+        <div class="calendar-grid" id="calendar-grid">
+            <!-- As aulas serão inseridas aqui via JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <div class="modal-title" id="modal-title"></div>
+                <div class="modal-date" id="modal-date"></div>
+                <div class="modal-professor" id="modal-professor"></div>
+            </div>
+            <div class="modal-description" id="modal-description"></div>
+            <div class="modal-produto" id="modal-produto">
+                <h4>Produto Esperado:</h4>
+                <p id="modal-produto-texto"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const aulas = [
+            {
+                numero: "Aula 1",
+                data: "25/08/25",
+                titulo: "Apresentação da UC, configuração do ambiente (IDE) e GitHub",
+                descricao: "Apresentação da UC, configuração do ambiente (IDE) e GitHub.",
+                produto: "IDE configurada + 1º repositório criado.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-1"
+            },
+            {
+                numero: "Aula 2",
+                data: "01/09/25",
+                titulo: "Gestão da Qualidade: ferramentas (5W2H, monitoramento, controle e registro)",
+                descricao: "Gestão da Qualidade: ferramentas (5W2H, monitoramento, controle e registro).",
+                produto: "Exercício aplicado de 5W2H.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-2"
+            },
+            {
+                numero: "Aula 3",
+                data: "08/09/25",
+                titulo: "Introdução à Programação de Aplicativos. Lógica estruturada",
+                descricao: "Introdução à Programação de Aplicativos. Lógica estruturada.",
+                produto: "Exercícios práticos de lógica.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-3"
+            },
+            {
+                numero: "Aula 4",
+                data: "15/09/25",
+                titulo: "Linguagem Python: sintaxe básica, variáveis e estruturas de decisão",
+                descricao: "Linguagem Python: sintaxe básica, variáveis e estruturas de decisão.",
+                produto: "Atividade prática.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-3"
+            },
+            {
+                numero: "Aula 5",
+                data: "22/09/25",
+                titulo: "Estruturas de repetição e funções",
+                descricao: "Estruturas de repetição e funções.",
+                produto: "Exercícios práticos.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-3"
+            },
+            {
+                numero: "Aula 6",
+                data: "29/09/25",
+                titulo: "Programação orientada a objetos: classes e objetos",
+                descricao: "Programação orientada a objetos: classes e objetos.",
+                produto: "Exercício POO aplicado ao projeto.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-3"
+            },
+            {
+                numero: "Aula 7",
+                data: "06/10/25",
+                titulo: "Boas práticas: formatação, comentários, documentação de código",
+                descricao: "Boas práticas: formatação, comentários, documentação de código.",
+                produto: "Pequeno módulo com boas práticas aplicadas.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-3"
+            },
+            {
+                numero: "Aula 8",
+                data: "20/10/25",
+                titulo: "Testes unitários iniciais no projeto",
+                descricao: "Testes unitários iniciais no projeto.",
+                produto: "Testes documentados.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-3"
+            },
+            {
+                numero: "Aula 9",
+                data: "22/10/25",
+                titulo: "Exercícios integrando lógica, POO e boas práticas. Prova Objetiva 1",
+                descricao: "Exercícios integrando lógica, POO e boas práticas. Prova Objetiva 1.",
+                produto: "Prova Objetiva 1.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-3"
+            },
+            {
+                numero: "Aula 10",
+                data: "27/10/25",
+                titulo: "Introdução à Modelagem de Negócios (Canvas). Estrutura inicial do projeto",
+                descricao: "Introdução à Modelagem de Negócios (Canvas). Estrutura inicial do projeto.",
+                produto: "Canvas preliminar do projeto.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-4"
+            },
+            {
+                numero: "Aula 11",
+                data: "30/10/25",
+                titulo: "Modelagem do sistema: requisitos, funcionalidades e fluxos",
+                descricao: "Modelagem do sistema: requisitos, funcionalidades e fluxos.",
+                produto: "Estrutura de requisitos levantada.",
+                professor: "Prof. Bruno",
+                bloco: "bloco-4"
+            },
+            {
+                numero: "Aula 12",
+                data: "03/11/25",
+                titulo: "Documentação inicial e planejamento da rotina de trabalho",
+                descricao: "Documentação inicial e planejamento da rotina de trabalho.",
+                produto: "Documento de requisitos.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-4"
+            },
+            {
+                numero: "Aula 13",
+                data: "06/11/25",
+                titulo: "Estruturação do repositório do projeto e boas práticas de versionamento",
+                descricao: "Estruturação do repositório do projeto e boas práticas de versionamento.",
+                produto: "Repositório organizado.",
+                professor: "Prof. Bruno",
+                bloco: "bloco-4"
+            },
+            {
+                numero: "Aula 14",
+                data: "10/11/25",
+                titulo: "Ética e profissionalismo na programação",
+                descricao: "Ética e profissionalismo na programação.",
+                produto: "Registro reflexivo sobre conduta ética.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-4"
+            },
+            {
+                numero: "Aula 15",
+                data: "13/11/25",
+                titulo: "Apresentação parcial da modelagem de negócios",
+                descricao: "Apresentação parcial da modelagem de negócios.",
+                produto: "Apresentação do Canvas validado.",
+                professor: "Prof. Bruno",
+                bloco: "bloco-4"
+            },
+            {
+                numero: "Aula 16",
+                data: "17/11/25",
+                titulo: "Técnicas de programação avançada: depuração e otimização",
+                descricao: "Técnicas de programação avançada: depuração e otimização.",
+                produto: "Exercícios práticos.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-5"
+            },
+            {
+                numero: "Aula 17",
+                data: "24/11/25",
+                titulo: "Introdução a Banco de Dados: conceitos, tabelas e consultas básicas",
+                descricao: "Introdução a Banco de Dados: conceitos, tabelas e consultas básicas.",
+                produto: "Banco de dados inicial criado.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-5"
+            },
+            {
+                numero: "Aula 18",
+                data: "27/11/25",
+                titulo: "Conexão Python ↔ Banco de Dados",
+                descricao: "Conexão Python ↔ Banco de Dados.",
+                produto: "CRUD básico conectado.",
+                professor: "Prof. Bruno",
+                bloco: "bloco-5"
+            },
+            {
+                numero: "Aula 19",
+                data: "01/12/25",
+                titulo: "Consultas SQL com JOINs",
+                descricao: "Consultas SQL com JOINs.",
+                produto: "Exercícios de SQL aplicados.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-5"
+            },
+            {
+                numero: "Aula 20",
+                data: "04/12/25",
+                titulo: "Integração CRUD completo no projeto",
+                descricao: "Integração CRUD completo no projeto.",
+                produto: "Projeto atualizado.",
+                professor: "Prof. Bruno",
+                bloco: "bloco-5"
+            },
+            {
+                numero: "Aula 21",
+                data: "08/12/25",
+                titulo: "Testes unitários e rastreabilidade do código",
+                descricao: "Testes unitários e rastreabilidade do código.",
+                produto: "Testes documentados.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-5"
+            },
+            {
+                numero: "Aula 22",
+                data: "11/12/25",
+                titulo: "Exercícios de integração final. Prova Objetiva 2",
+                descricao: "Exercícios de integração final. Prova Objetiva 2.",
+                produto: "Prova Objetiva 2.",
+                professor: "Prof. Bruno",
+                bloco: "bloco-5"
+            },
+            {
+                numero: "Aula 23",
+                data: "12/12/25",
+                titulo: "Desenvolvimento do Projeto Final (etapa 1)",
+                descricao: "Desenvolvimento do Projeto Final (etapa 1).",
+                produto: "Projeto em desenvolvimento.",
+                professor: "Prof. Rogério",
+                bloco: "bloco-6"
+            },
+            {
+                numero: "Aula 24",
+                data: "15/12/25",
+                titulo: "Desenvolvimento do Projeto Final (etapa 2)",
+                descricao: "Desenvolvimento do Projeto Final (etapa 2).",
+                produto: "Protótipo funcional.",
+                professor: "Prof. Daniel",
+                bloco: "bloco-6"
+            },
+            {
+                numero: "Aula 25",
+                data: "16/12/25",
+                titulo: "Apresentação e entrega do Projeto Final",
+                descricao: "Apresentação e entrega do Projeto Final.",
+                produto: "Prova Prática (Apresentação do sistema).",
+                professor: "Prof. Rogério",
+                bloco: "bloco-6"
+            }
+        ];
+
+        // Criar cards das aulas
+        function criarCalendario() {
+            const grid = document.getElementById('calendar-grid');
+            
+            aulas.forEach(aula => {
+                const card = document.createElement('div');
+                card.className = `aula-card ${aula.bloco}`;
+                card.innerHTML = `
+                    <div class="aula-number">${aula.numero}</div>
+                    <div class="aula-date">📅 ${aula.data}</div>
+                    <div class="aula-title">${aula.titulo}</div>
+                    <div class="professor-info">👨‍🏫 ${aula.professor}</div>
+                `;
+                
+                card.addEventListener('click', () => {
+                    mostrarModal(aula);
+                });
+                
+                grid.appendChild(card);
+            });
+        }
+
+        // Modal
+        const modal = document.getElementById('modal');
+        const closeBtn = document.querySelector('.close');
+
+        function mostrarModal(aula) {
+            document.getElementById('modal-title').textContent = aula.titulo;
+            document.getElementById('modal-date').textContent = `${aula.numero} - ${aula.data}`;
+            document.getElementById('modal-professor').textContent = `👨‍🏫 ${aula.professor}`;
+            document.getElementById('modal-description').textContent = aula.descricao;
+            document.getElementById('modal-produto-texto').textContent = aula.produto;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        closeBtn.onclick = fecharModal;
+
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                fecharModal();
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                fecharModal();
+            }
+        });
+
+        // Inicializar
+        criarCalendario();
+    </script>
+</body>
+</html>
