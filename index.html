@@ -28,10 +28,10 @@
         }
 
         .header {
-            background: linear-gradient(45deg, #2c3e50, #3498db);
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); /* Alterado para o estilo do calendário modelo */
             color: white;
-            padding: 30px;
             text-align: center;
+            padding: 30px;
         }
 
         .header h1 {
@@ -46,30 +46,23 @@
         }
 
         .legend {
+            display: flex; /* Alterado para o estilo do calendário modelo */
+            justify-content: center; /* Alterado para o estilo do calendário modelo */
+            flex-wrap: wrap; /* Alterado para o estilo do calendário modelo */
+            gap: 20px; /* Alterado para o estilo do calendário modelo */
             padding: 30px;
             background: #f8f9fa;
-            border-bottom: 3px solid #e9ecef;
-        }
-
-        .legend h2 {
-            margin-bottom: 20px;
-            color: #2c3e50;
-            font-size: 1.5rem;
-        }
-
-        .legend-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
+            border-bottom: 1px solid #e9ecef; /* Alterado para o estilo do calendário modelo */
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            padding: 12px;
-            border-radius: 8px;
+            gap: 10px; /* Alterado para o estilo do calendário modelo */
+            padding: 10px 20px; /* Alterado para o estilo do calendário modelo */
+            border-radius: 25px; /* Alterado para o estilo do calendário modelo */
             background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Alterado para o estilo do calendário modelo */
             transition: transform 0.2s ease;
         }
 
@@ -80,90 +73,141 @@
         .legend-color {
             width: 20px;
             height: 20px;
-            border-radius: 4px;
-            margin-right: 12px;
-            border: 2px solid rgba(0,0,0,0.1);
+            border-radius: 50%; /* Alterado para o estilo do calendário modelo */
+            margin-right: 0; /* Removido para usar gap */
+            border: none; /* Removido para usar border-radius */
         }
 
-        .bloco-1 { background-color: #FF6B6B; }
-        .bloco-2 { background-color: #4ECDC4; }
-        .bloco-3 { background-color: #45B7D1; }
-        .bloco-4 { background-color: #96CEB4; }
-        .bloco-5 { background-color: #FECA57; }
-        .bloco-6 { background-color: #FF9FF3; }
-
-        .calendar {
-            padding: 30px;
+        .legend-text { /* Adicionado para o estilo do calendário modelo */
+            font-weight: 600;
+            color: #2c3e50;
         }
 
         .calendar-grid {
+            padding: 30px;
             display: grid;
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Alterado para o estilo do calendário modelo */
+            gap: 20px; /* Alterado para o estilo do calendário modelo */
         }
 
-        .aula-item {
+        .aula-card { /* Renomeado de .aula-item para .aula-card */
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            border-left: 5px solid;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Alterado para o estilo do calendário modelo */
             transition: all 0.3s ease;
             cursor: pointer;
+            border-left: 5px solid;
+            position: relative; /* Adicionado para o estilo do calendário modelo */
+            overflow: hidden; /* Adicionado para o estilo do calendário modelo */
             color: white;
-            font-weight: 500;
         }
 
-        .aula-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+        .aula-card:hover { /* Renomeado de .aula-item:hover para .aula-card:hover */
+            transform: translateY(-5px); /* Alterado para o estilo do calendário modelo */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* Alterado para o estilo do calendário modelo */
         }
 
-        .aula-header {
-            display: grid;
-            grid-template-columns: auto 1fr auto auto;
-            gap: 20px;
-            align-items: center;
+        .aula-card::before { /* Adicionado para o estilo do calendário modelo */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
         }
 
         .aula-numero {
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.9);
-            min-width: 60px;
+            font-size: 0.9rem; /* Alterado para o estilo do calendário modelo */
+            font-weight: 700; /* Alterado para o estilo do calendário modelo */
+            color: white;
+            background: rgba(0,0,0,0.2); /* Alterado para o estilo do calendário modelo */
+            padding: 5px 12px; /* Alterado para o estilo do calendário modelo */
+            border-radius: 15px; /* Alterado para o estilo do calendário modelo */
+            display: inline-block; /* Alterado para o estilo do calendário modelo */
+            margin-bottom: 10px; /* Alterado para o estilo do calendário modelo */
+            min-width: auto; /* Removido */
         }
 
         .aula-data {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: 2px solid rgba(255,255,255,0.3);
+            font-size: 1rem; /* Alterado para o estilo do calendário modelo */
+            color: rgba(255,255,255,0.8); /* Alterado para o estilo do calendário modelo */
+            margin-bottom: 8px; /* Alterado para o estilo do calendário modelo */
+            font-weight: 500;
+            background: none; /* Removido */
+            padding: 0; /* Removido */
+            border-radius: 0; /* Removido */
+            border: none; /* Removido */
+            cursor: default; /* Removido */
         }
 
-        .aula-data:hover {
-            background: rgba(255,255,255,0.3);
-            border-color: rgba(255,255,255,0.5);
-            transform: scale(1.02);
+        .aula-data:hover { /* Removido */
+            background: none;
+            border-color: none;
+            transform: none;
         }
 
         .aula-titulo {
-            flex: 1;
+            flex: none; /* Removido */
             font-weight: 600;
             color: white;
-            font-size: 1.1rem;
+            font-size: 1.2rem; /* Alterado para o estilo do calendário modelo */
+            margin-bottom: 10px; /* Adicionado para o estilo do calendário modelo */
+            line-height: 1.3; /* Adicionado para o estilo do calendário modelo */
         }
 
         .aula-professor {
-            background: rgba(0,0,0,0.2);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 0.9rem;
+            font-size: 1rem; /* Alterado para o estilo do calendário modelo */
+            color: rgba(255,255,255,0.9); /* Alterado para o estilo do calendário modelo */
             font-weight: 500;
+            background: none; /* Removido */
+            padding: 0; /* Removido */
+            border-radius: 0; /* Removido */
         }
 
+        /* Cores dos blocos (adaptado para o index.html) */
+        .bloco-1 {
+            background: linear-gradient(135deg, #FF6B6B, #E05C5C);
+            border-left-color: #C74B4B;
+        }
+        .bloco-1::before { background: #C74B4B; }
+        .bloco-1 .aula-numero { background: rgba(0,0,0,0.3); }
+
+        .bloco-2 {
+            background: linear-gradient(135deg, #4ECDC4, #42B9B0);
+            border-left-color: #36A59C;
+        }
+        .bloco-2::before { background: #36A59C; }
+        .bloco-2 .aula-numero { background: rgba(0,0,0,0.3); }
+
+        .bloco-3 {
+            background: linear-gradient(135deg, #45B7D1, #3A9FC7);
+            border-left-color: #2F88B3;
+        }
+        .bloco-3::before { background: #2F88B3; }
+        .bloco-3 .aula-numero { background: rgba(0,0,0,0.3); }
+
+        .bloco-4 {
+            background: linear-gradient(135deg, #96CEB4, #82B8A0);
+            border-left-color: #6E9F8C;
+        }
+        .bloco-4::before { background: #6E9F8C; }
+        .bloco-4 .aula-numero { background: rgba(0,0,0,0.3); }
+
+        .bloco-5 {
+            background: linear-gradient(135deg, #FECA57, #E5B54A);
+            border-left-color: #CC9F3D;
+        }
+        .bloco-5::before { background: #CC9F3D; }
+        .bloco-5 .aula-numero { background: rgba(0,0,0,0.3); }
+
+        .bloco-6 {
+            background: linear-gradient(135deg, #FF9FF3, #E68BE0);
+            border-left-color: #CC77C7;
+        }
+        .bloco-6::before { background: #CC77C7; }
+        .bloco-6 .aula-numero { background: rgba(0,0,0,0.3); }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -172,7 +216,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.7);
+            background-color: rgba(0,0,0,0.5); /* Alterado para o estilo do calendário modelo */
             backdrop-filter: blur(5px);
         }
 
@@ -185,60 +229,72 @@
             max-width: 600px;
             max-height: 80vh;
             overflow-y: auto;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3); /* Alterado para o estilo do calendário modelo */
             animation: modalSlideIn 0.3s ease;
         }
 
         @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from { opacity: 0; transform: translateY(-50px); } /* Alterado para o estilo do calendário modelo */
+            to { opacity: 1; transform: translateY(0); } /* Alterado para o estilo do calendário modelo */
         }
 
         .modal-header {
-            background: linear-gradient(45deg, #2c3e50, #3498db);
-            color: white;
-            padding: 25px;
-            border-radius: 15px 15px 0 0;
+            padding: 25px; /* Alterado para o estilo do calendário modelo */
+            border-bottom: 1px solid #e9ecef; /* Alterado para o estilo do calendário modelo */
+            display: flex; /* Alterado para o estilo do calendário modelo */
+            justify-content: space-between; /* Alterado para o estilo do calendário modelo */
+            align-items: center; /* Alterado para o estilo do calendário modelo */
+            background: none; /* Removido */
+            color: #2c3e50; /* Alterado para o estilo do calendário modelo */
+            border-radius: 15px 15px 0 0; /* Removido */
         }
 
-        .modal-header h3 {
+        .modal-title { /* Renomeado de .modal-header h3 para .modal-title */
             font-size: 1.5rem;
-            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50; /* Alterado para o estilo do calendário modelo */
+            margin: 0; /* Alterado para o estilo do calendário modelo */
         }
 
-        .modal-header p {
+        .modal-header p { /* Removido */
             opacity: 0.9;
         }
 
         .modal-body {
-            padding: 30px;
+            padding: 25px; /* Alterado para o estilo do calendário modelo */
         }
 
-        .modal-body h4 {
+        .modal-info { /* Adicionado para o estilo do calendário modelo */
+            margin-bottom: 20px;
+        }
+
+        .modal-info strong { /* Adicionado para o estilo do calendário modelo */
             color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
+            display: inline-block;
+            width: 80px;
         }
 
-        .modal-body ul {
-            list-style: none;
-            padding: 0;
+        .modal-description { /* Renomeado de .modal-body h4 para .modal-description */
+            line-height: 1.6; /* Adicionado para o estilo do calendário modelo */
+            color: #555; /* Alterado para o estilo do calendário modelo */
+            font-size: 1rem; /* Alterado para o estilo do calendário modelo */
         }
 
-        .modal-body li {
-            padding: 8px 0;
-            border-bottom: 1px solid #f1f3f4;
-            position: relative;
+        .modal-description ul { /* Adicionado para o estilo do calendário modelo */
+            margin: 15px 0;
             padding-left: 20px;
+            list-style: disc; /* Alterado para o estilo do calendário modelo */
         }
 
-        .modal-body li:before {
+        .modal-description li { /* Adicionado para o estilo do calendário modelo */
+            margin: 8px 0;
+            padding: 0; /* Removido */
+            border-bottom: none; /* Removido */
+            position: static; /* Removido */
+            padding-left: 0; /* Removido */
+        }
+
+        .modal-description li:before { /* Removido */
             content: "▶";
             position: absolute;
             left: 0;
@@ -247,38 +303,38 @@
         }
 
         .close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
+            position: static; /* Alterado para o estilo do calendário modelo */
+            right: auto; /* Alterado para o estilo do calendário modelo */
+            top: auto; /* Alterado para o estilo do calendário modelo */
             font-size: 28px;
             font-weight: bold;
-            color: rgba(255,255,255,0.8);
+            color: #aaa; /* Alterado para o estilo do calendário modelo */
             cursor: pointer;
             transition: color 0.2s ease;
         }
 
         .close:hover {
-            color: white;
+            color: #e74c3c; /* Alterado para o estilo do calendário modelo */
         }
 
         @media (max-width: 768px) {
+            .calendar-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            
+            .legend {
+                flex-direction: column;
+                align-items: center;
+            }
+            
             .header h1 {
                 font-size: 2rem;
             }
             
-            .aula-header {
-                grid-template-columns: auto 1fr;
-                gap: 15px;
-            }
-            
-            .aula-professor {
-                grid-column: 1 / -1;
-                justify-self: start;
-                margin-top: 10px;
-            }
-            
-            .legend-grid {
-                grid-template-columns: 1fr;
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
             }
         }
     </style>
@@ -286,37 +342,38 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Calendário PRAP M2</h1>
-            <p>Programação de Aplicativos - 2025</p>
+            <h1>Curso Técnico em Desenvolvimento de Sistemas - SENAI</h1>
+            <h2>Calendário de Aulas - Turma T DESS 2025/1 - M2</h2>
+            <p>Curso Técnico em Desenvolvimento de Sistemas</p><br>
+            <p>Unidade Curricular <br><b>Programação de Aplicativos</b></p>
+            <br>
+            <p><b>Clique na aula para ver o conteúdo.</b></p>
         </div>
 
         <div class="legend">
-            <h2>Legenda dos Blocos</h2>
-            <div class="legend-grid">
-                <div class="legend-item">
-                    <div class="legend-color bloco-1"></div>
-                    <span><strong>Bloco 1:</strong> Procedimentos de preparação de ambiente (IDE) e repositório (GitHub)</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color bloco-2"></div>
-                    <span><strong>Bloco 2:</strong> Gestão da Qualidade</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color bloco-3"></div>
-                    <span><strong>Bloco 3:</strong> Introdução a programação de aplicativos</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color bloco-4"></div>
-                    <span><strong>Bloco 4:</strong> Técnicas de programação e conexão com banco de dados</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color bloco-5"></div>
-                    <span><strong>Bloco 5:</strong> Modelagem de projeto prático</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color bloco-6"></div>
-                    <span><strong>Bloco 6:</strong> Programação de aplicativos - Projeto prático</span>
-                </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #FF6B6B;"></div>
+                <span class="legend-text">Bloco 1 - Procedimentos de preparação de ambiente (IDE) e repositório (GitHub)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #4ECDC4;"></div>
+                <span class="legend-text">Bloco 2 - Gestão da Qualidade</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #45B7D1;"></div>
+                <span class="legend-text">Bloco 3 - Introdução a programação de aplicativos</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #96CEB4;"></div>
+                <span class="legend-text">Bloco 4 - Técnicas de programação e conexão com banco de dados</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #FECA57;"></div>
+                <span class="legend-text">Bloco 5 - Modelagem de projeto prático</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #FF9FF3;"></div>
+                <span class="legend-text">Bloco 6 - Programação de aplicativos - Projeto prático</span>
             </div>
         </div>
 
@@ -331,13 +388,16 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="close">&times;</span>
-                <h3 id="modal-title"></h3>
-                <p id="modal-date"></p>
+                <h2 class="modal-title" id="modal-title"></h2>
+                <span class="close" id="close-modal">&times;</span>
             </div>
             <div class="modal-body">
-                <h4>Descrição da Aula:</h4>
-                <div id="modal-description"></div>
+                <div class="modal-info">
+                    <p><strong>Data:</strong> <span id="modal-data"></span></p>
+                    <p><strong>Professor:</strong> <span id="modal-professor"></span></p>
+                    <p><strong>Bloco:</strong> <span id="modal-bloco"></span></p>
+                </div>
+                <div class="modal-description" id="modal-description"></div>
             </div>
         </div>
     </div>
@@ -349,373 +409,365 @@
                 data: "25/08/2025",
                 titulo: "Apresentação da UC, configuração do ambiente (IDE) e GitHub",
                 professor: "Daniel",
-                bloco: 1,
-                descricao: [
-                    "Apresentação do Professor e da UC",
-                    "Procedimentos de preparação de ambiente (ide) e repositório (github)"
-                ]
+                bloco: "Bloco 1", // Alterado para string
+                blocoClasse: "bloco-1", // Adicionado para o estilo
+                descricao: `<strong>Apresentação do Professor e da UC</strong><br>
+                • Procedimentos de preparação de ambiente (ide) e repositório (github)`
             },
             {
                 numero: "Aula 2",
                 data: "01/09/2025",
                 titulo: "Gestão da Qualidade: ferramentas (5W2H, monitoramento, controle e registro)",
                 professor: "Daniel",
-                bloco: 2,
-                descricao: [
-                    "Aplicação de ferramentas de qualidade no desenvolvimento de software",
-                    "Ferramentas da Qualidade (5W2H, registro, controle e monitoramento)",
-                    "Boas práticas em programação",
-                    "Relação entre qualidade e usabilidade",
-                    "Exercício prático aplicando ferramenta de qualidade (ex.: 5W2H aplicado ao projeto)"
-                ]
+                bloco: "Bloco 2",
+                blocoClasse: "bloco-2",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Aplicação de ferramentas de qualidade no desenvolvimento de software<br>
+                • Ferramentas da Qualidade (5W2H, registro, controle e monitoramento)<br>
+                • Boas práticas em programação<br>
+                • Relação entre qualidade e usabilidade<br>
+                • Exercício prático aplicando ferramenta de qualidade (ex.: 5W2H aplicado ao projeto)`
             },
             {
                 numero: "Aula 3",
                 data: "08/09/2025",
                 titulo: "Fundamentos da programação com python",
                 professor: "Daniel",
-                bloco: 3,
-                descricao: [
-                    "Paradigmas da programação",
-                    "Configuração do ambiente",
-                    "Sintaxe básica do python",
-                    "Tipos de dados fundamentais",
-                    "Operadores"
-                ]
+                bloco: "Bloco 3",
+                blocoClasse: "bloco-3",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Paradigmas da programação<br>
+                • Configuração do ambiente<br>
+                • Sintaxe básica do python<br>
+                • Tipos de dados fundamentais<br>
+                • Operadores`
             },
             {
                 numero: "Aula 4",
                 data: "15/09/2025",
                 titulo: "Linguagem Python: sintaxe básica, variáveis e estruturas de decisão",
                 professor: "Daniel",
-                bloco: 3,
-                descricao: [
-                    "Implementar estruturas condicionais para tomada de decisões",
-                    "Criar loops eficientes para automação de tarefas",
-                    "Combinar estruturas de controle em algoritmos complexos",
-                    "Aplicar boas práticas na escrita de código condicional"
-                ]
+                bloco: "Bloco 3",
+                blocoClasse: "bloco-3",
+                descricao: `<strong>Objetivos da aula:</strong><br>
+                • Implementar estruturas condicionais para tomada de decisões<br>
+                • Criar loops eficientes para automação de tarefas<br>
+                • Combinar estruturas de controle em algoritmos complexos<br>
+                • Aplicar boas práticas na escrita de código condicional`
             },
             {
                 numero: "Aula 5",
                 data: "22/09/2025",
                 titulo: "Estruturas de Dados",
                 professor: "Daniel",
-                bloco: 3,
-                descricao: [
-                    "Listas",
-                    "Tuplas",
-                    "Dicionários",
-                    "Técnicas de manipulação",
-                    "Atividades práticas"
-                ]
+                bloco: "Bloco 3",
+                blocoClasse: "bloco-3",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Listas<br>
+                • Tuplas<br>
+                • Dicionários<br>
+                • Técnicas de manipulação<br>
+                • Atividades práticas`
             },
             {
                 numero: "Aula 6",
                 data: "29/09/2025",
                 titulo: "Funções e Modularização",
                 professor: "Daniel",
-                bloco: 3,
-                descricao: [
-                    "Fundamentos de Funções",
-                    "Escopo de variáveis",
-                    "Modularização e organização",
-                    "Boas práticas e padrões",
-                    "Atividades práticas",
-                    "Projetos"
-                ]
+                bloco: "Bloco 3",
+                blocoClasse: "bloco-3",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Fundamentos de Funções<br>
+                • Escopo de variáveis<br>
+                • Modularização e organização<br>
+                • Boas práticas e padrões<br>
+                • Atividades práticas<br>
+                • Projetos`
             },
             {
                 numero: "Aula 7",
                 data: "06/10/2025",
                 titulo: "Documentação, Rastreabilidade e Testes iniciais",
                 professor: "Daniel",
-                bloco: 3,
-                descricao: [
-                    "Técnicas de documentação",
-                    "Formatação e boas práticas",
-                    "Rastreabilidade e depuração",
-                    "Introdução a testes unitários",
-                    "Atividades práticas",
-                    "Projetos de consolidação"
-                ]
+                bloco: "Bloco 3",
+                blocoClasse: "bloco-3",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Técnicas de documentação<br>
+                • Formatação e boas práticas<br>
+                • Rastreabilidade e depuração<br>
+                • Introdução a testes unitários<br>
+                • Atividades práticas<br>
+                • Projetos de consolidação`
             },
             {
                 numero: "Aula 8",
                 data: "20/10/2025",
                 titulo: "Prova Objetiva 1",
                 professor: "Daniel",
-                bloco: 4,
-                descricao: [
-                    "Revisão de Conteúdo",
-                    "Aplicação da Prova Objetiva 1 - Conteúdo dos Blocos 1, 2 e 3"
-                ]
+                bloco: "Bloco 4",
+                blocoClasse: "bloco-4",
+                descricao: `<strong>Avaliação:</strong><br>
+                • Revisão de Conteúdo<br>
+                • Aplicação da Prova Objetiva 1 - Conteúdo dos Blocos 1, 2 e 3`
             },
             {
                 numero: "Aula 9",
                 data: "27/10/2025",
                 titulo: "Pilares da POO",
                 professor: "Daniel",
-                bloco: 4,
-                descricao: [
-                    "Aprofundando em Orientação a Objetos",
-                    "Encapsulamento, Herança e Polimorfismo",
-                    "Aplicação prática dos conceitos em Python"
-                ]
+                bloco: "Bloco 4",
+                blocoClasse: "bloco-4",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Aprofundando em Orientação a Objetos<br>
+                • Encapsulamento, Herança e Polimorfismo<br>
+                • Aplicação prática dos conceitos em Python`
             },
             {
                 numero: "Aula 10",
                 data: "30/10/2025",
                 titulo: "Fundamentos de Banco de Dados Relacional",
                 professor: "Daniel",
-                bloco: 4,
-                descricao: [
-                    "Introdução ao armazenamento e gerenciamento de dados",
-                    "Conceitos de bancos de dados relacionais",
-                    "Linguagem SQL: CREATE, SELECT, INSERT, UPDATE, DELETE"
-                ]
+                bloco: "Bloco 4",
+                blocoClasse: "bloco-4",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Introdução ao armazenamento e gerenciamento de dados<br>
+                • Conceitos de bancos de dados relacionais<br>
+                • Linguagem SQL: CREATE, SELECT, INSERT, UPDATE, DELETE`
             },
             {
                 numero: "Aula 11",
                 data: "03/11/2025",
                 titulo: "Conectando a Aplicação ao Banco de Dados",
                 professor: "Daniel",
-                bloco: 4,
-                descricao: [
-                    "Integração entre Python e o banco de dados",
-                    "Apresentação de bibliotecas de conexão",
-                    "Estabelecendo a primeira conexão e executando consultas simples"
-                ]
+                bloco: "Bloco 4",
+                blocoClasse: "bloco-4",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Integração entre Python e o banco de dados<br>
+                • Apresentação de bibliotecas de conexão<br>
+                • Estabelecendo a primeira conexão e executando consultas simples`
             },
             {
                 numero: "Aula 12",
                 data: "06/11/2025",
                 titulo: "Manipulando Dados via Aplicação (CRUD)",
                 professor: "Daniel",
-                bloco: 4,
-                descricao: [
-                    "Implementando as operações básicas de banco de dados no sistema",
-                    "Desenvolvimento das funções para Inserir, Ler, Atualizar e Deletar Registros (CRUD)"
-                ]
+                bloco: "Bloco 4",
+                blocoClasse: "bloco-4",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Implementando as operações básicas de banco de dados no sistema<br>
+                • Desenvolvimento das funções para Inserir, Ler, Atualizar e Deletar Registros (CRUD)`
             },
             {
                 numero: "Aula 13",
                 data: "10/11/2025",
                 titulo: "Consultas Avançadas e Testes Unitários",
                 professor: "Daniel",
-                bloco: 4,
-                descricao: [
-                    "Realizando consultas complexas e garantindo a qualidade com testes",
-                    "Uso de INNER JOIN para consulta em múltiplas tabelas, conforme requisito do projeto",
-                    "Aplicação de testes unitários para validar as funcionalidades de banco de dados"
-                ]
+                bloco: "Bloco 4",
+                blocoClasse: "bloco-4",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Realizando consultas complexas e garantindo a qualidade com testes<br>
+                • Uso de INNER JOIN para consulta em múltiplas tabelas, conforme requisito do projeto<br>
+                • Aplicação de testes unitários para validar as funcionalidades de banco de dados`
             },
             {
                 numero: "Aula 14",
                 data: "13/11/2025",
                 titulo: "Otimização de Código e Depuração Avançada",
                 professor: "Daniel",
-                bloco: 4,
-                descricao: [
-                    "Refinando e melhorando a performance do código",
-                    "Técnicas de otimização de código",
-                    "Uso de ferramentas avançadas de depuração da IDE"
-                ]
+                bloco: "Bloco 4",
+                blocoClasse: "bloco-4",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Refinando e melhorando a performance do código<br>
+                • Técnicas de otimização de código<br>
+                • Uso de ferramentas avançadas de depuração da IDE`
             },
             {
                 numero: "Aula 15",
                 data: "17/11/2025",
                 titulo: "Prova Objetiva 2",
                 professor: "Bruno",
-                bloco: 5,
-                descricao: [
-                    "Revisão de Conteúdo",
-                    "Aplicação da Prova Objetiva 2 - Conteúdo dos Blocos 1, 2, 3 e 4"
-                ]
+                bloco: "Bloco 5",
+                blocoClasse: "bloco-5",
+                descricao: `<strong>Avaliação:</strong><br>
+                • Revisão de Conteúdo<br>
+                • Aplicação da Prova Objetiva 2 - Conteúdo dos Blocos 1, 2, 3 e 4`
             },
             {
                 numero: "Aula 16",
                 data: "24/11/2025",
                 titulo: "Modelagem de Negócios com Canvas",
                 professor: "Bruno",
-                bloco: 5,
-                descricao: [
-                    "Estruturando a ideia do projeto com o Business Model Canvas",
-                    "Apresentação do Canvas e seus componentes",
-                    "Início da elaboração do Canvas pelas equipes"
-                ]
+                bloco: "Bloco 5",
+                blocoClasse: "bloco-5",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Estruturando a ideia do projeto com o Business Model Canvas<br>
+                • Apresentação do Canvas e seus componentes<br>
+                • Início da elaboração do Canvas pelas equipes`
             },
             {
                 numero: "Aula 17",
                 data: "27/11/2025",
                 titulo: "Ética e Profissionalismo no Desenvolvimento",
                 professor: "Bruno",
-                bloco: 5,
-                descricao: [
-                    "Aliando a modelagem do negócio a uma conduta profissional",
-                    "Discussão sobre princípios da conduta ética: sigilo, prudência, imparcialidade e honestidade",
-                    "Reutilização da modelagem de sistemas desenvolvida em outra unidade curricular"
-                ]
+                bloco: "Bloco 5",
+                blocoClasse: "bloco-5",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Aliando a modelagem do negócio a uma conduta profissional<br>
+                • Discussão sobre princípios da conduta ética: sigilo, prudência, imparcialidade e honestidade<br>
+                • Reutilização da modelagem de sistemas desenvolvida em outra unidade curricular`
             },
             {
                 numero: "Aula 18",
                 data: "01/12/2025",
                 titulo: "Arquitetura da Aplicação e do Banco de Dados",
                 professor: "Daniel",
-                bloco: 5,
-                descricao: [
-                    "Desenhando a estrutura do software e do banco de dados",
-                    "Definição da arquitetura da aplicação desktop",
-                    "Modelagem do banco de dados do projeto"
-                ]
+                bloco: "Bloco 5",
+                blocoClasse: "bloco-5",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Desenhando a estrutura do software e do banco de dados<br>
+                • Definição da arquitetura da aplicação desktop<br>
+                • Modelagem do banco de dados do projeto`
             },
             {
                 numero: "Aula 19",
                 data: "04/12/2025",
                 titulo: "Planejamento do Desenvolvimento",
                 professor: "Daniel",
-                bloco: 5,
-                descricao: [
-                    "Organizando o trabalho da equipe",
-                    "Divisão do projeto em tarefas e metas",
-                    "Distribuição de responsabilidades e definição de um cronograma de entregas"
-                ]
+                bloco: "Bloco 5",
+                blocoClasse: "bloco-5",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Organizando o trabalho da equipe<br>
+                • Divisão do projeto em tarefas e metas<br>
+                • Distribuição de responsabilidades e definição de um cronograma de entregas`
             },
             {
                 numero: "Aula 20",
                 data: "08/12/2025",
                 titulo: "Implementação do CRUD (Create e Read)",
                 professor: "Daniel",
-                bloco: 6,
-                descricao: [
-                    "Codificação das funcionalidades de criação e leitura de dados",
-                    "Desenvolvimento das interfaces e lógicas para cadastrar e listar informações do banco de dados"
-                ]
+                bloco: "Bloco 6",
+                blocoClasse: "bloco-6",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Codificação das funcionalidades de criação e leitura de dados<br>
+                • Desenvolvimento das interfaces e lógicas para cadastrar e listar informações do banco de dados`
             },
             {
                 numero: "Aula 21",
                 data: "11/12/2025",
                 titulo: "Implementação do CRUD (Update e Delete)",
                 professor: "Bruno",
-                bloco: 6,
-                descricao: [
-                    "Codificação das funcionalidades de atualização e exclusão de dados",
-                    "Desenvolvimento das interfaces e lógicas para editar e remover informações do banco de dados"
-                ]
+                bloco: "Bloco 6",
+                blocoClasse: "bloco-6",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Codificação das funcionalidades de atualização e exclusão de dados<br>
+                • Desenvolvimento das interfaces e lógicas para editar e remover informações do banco de dados`
             },
             {
                 numero: "Aula 22",
                 data: "12/12/2025",
                 titulo: "Integração e Consultas Complexas",
                 professor: "Bruno",
-                bloco: 6,
-                descricao: [
-                    "Conectando os módulos e implementando as consultas do projeto",
-                    "Garantir a integração de todas as funcionalidades do CRUD",
-                    "Implementar a consulta com INNER JOIN na aplicação"
-                ]
+                bloco: "Bloco 6",
+                blocoClasse: "bloco-6",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Conectando os módulos e implementando as consultas do projeto<br>
+                • Garantir a integração de todas as funcionalidades do CRUD<br>
+                • Implementar a consulta com INNER JOIN na aplicação`
             },
             {
                 numero: "Aula 23",
                 data: "15/12/2025",
                 titulo: "Preparação para a Apresentação Final",
                 professor: "Rogério",
-                bloco: 6,
-                descricao: [
-                    "Finalização do projeto e preparação da defesa",
-                    "Últimos ajustes no sistema",
-                    "Elaboração do material de apresentação",
-                    "Ensaio da apresentação do projeto"
-                ]
+                bloco: "Bloco 6",
+                blocoClasse: "bloco-6",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Finalização do projeto e preparação da defesa<br>
+                • Últimos ajustes no sistema<br>
+                • Elaboração do material de apresentação<br>
+                • Ensaio da apresentação do projeto`
             },
             {
                 numero: "Aula 24",
                 data: "16/12/2025",
                 titulo: "Apresentação Final dos Projetos",
                 professor: "Rogério",
-                bloco: 6,
-                descricao: [
-                    "Demonstração dos sistemas desenvolvidos",
-                    "Apresentação dos projetos para a turma, professores e convidados",
-                    "Avaliação da aplicação da situação de aprendizagem"
-                ]
+                bloco: "Bloco 6",
+                blocoClasse: "bloco-6",
+                descricao: `<strong>Conteúdo da aula:</strong><br>
+                • Demonstração dos sistemas desenvolvidos<br>
+                • Apresentação dos projetos para a turma, professores e convidados<br>
+                • Avaliação da aplicação da situação de aprendizagem`
             }
         ];
 
-        const blocoColors = {
-            1: '#FF6B6B',
-            2: '#4ECDC4',
-            3: '#45B7D1',
-            4: '#96CEB4',
-            5: '#FECA57',
-            6: '#FF9FF3'
-        };
-
-        function renderCalendar() {
-            const grid = document.getElementById('calendar-grid');
+        // Função para renderizar as aulas
+        function renderAulas() {
+            const calendarGrid = document.getElementById('calendar-grid');
             
-            aulas.forEach(aula => {
-                const aulaElement = document.createElement('div');
-                aulaElement.className = 'aula-item';
-                aulaElement.style.background = blocoColors[aula.bloco];
-                aulaElement.style.borderLeftColor = blocoColors[aula.bloco];
+            aulas.forEach((aula, index) => {
+                const aulaCard = document.createElement('div');
+                aulaCard.className = `aula-card ${aula.blocoClasse}`;
+                aulaCard.onclick = () => openModal(aula);
                 
-                // Adiciona evento de clique a toda a aula
-                aulaElement.addEventListener('click', () => {
-                    openModal(aula.numero, aula.data, aula.titulo, aula.descricao);
-                });
-                
-                aulaElement.innerHTML = `
-                    <div class="aula-header">
-                        <div class="aula-numero">${aula.numero}</div>
-                        <div class="aula-titulo">${aula.titulo}</div>
-                        <div class="aula-data">${aula.data}</div>
-                        <div class="aula-professor">${aula.professor}</div>
-                    </div>
+                aulaCard.innerHTML = `
+                    <div class="aula-numero">${aula.numero}</div>
+                    <div class="aula-data">${aula.data}</div>
+                    <div class="aula-titulo">${aula.titulo}</div>
+                    <div class="aula-professor">Professor: ${aula.professor}</div>
                 `;
                 
-                grid.appendChild(aulaElement);
+                calendarGrid.appendChild(aulaCard);
             });
         }
 
-        function openModal(numero, data, titulo, descricao) {
+        // Função para abrir o modal
+        function openModal(aula) {
             const modal = document.getElementById('modal');
             const modalTitle = document.getElementById('modal-title');
-            const modalDate = document.getElementById('modal-date');
+            const modalData = document.getElementById('modal-data');
+            const modalProfessor = document.getElementById('modal-professor');
+            const modalBloco = document.getElementById('modal-bloco');
             const modalDescription = document.getElementById('modal-description');
             
-            modalTitle.textContent = `${numero} - ${titulo}`;
-            modalDate.textContent = data;
-            
-            const descList = document.createElement('ul');
-            descricao.forEach(item => {
-                const listItem = document.createElement('li');
-                listItem.textContent = item;
-                descList.appendChild(listItem);
-            });
-            
-            modalDescription.innerHTML = '';
-            modalDescription.appendChild(descList);
+            modalTitle.textContent = aula.titulo;
+            modalData.textContent = aula.data;
+            modalProfessor.textContent = aula.professor;
+            modalBloco.textContent = aula.bloco;
+            modalDescription.innerHTML = aula.descricao;
             
             modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
 
+        // Função para fechar o modal
         function closeModal() {
-            document.getElementById('modal').style.display = 'none';
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         // Event listeners
-        document.querySelector('.close').addEventListener('click', closeModal);
-        
-        window.addEventListener('click', function(event) {
-            const modal = document.getElementById('modal');
-            if (event.target === modal) {
-                closeModal();
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            renderAulas();
+            
+            // Fechar modal
+            document.getElementById('close-modal').onclick = closeModal;
+            
+            // Fechar modal clicando fora
+            document.getElementById('modal').onclick = function(event) {
+                if (event.target === this) {
+                    closeModal();
+                }
+            };
+            
+            // Fechar modal com tecla ESC
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeModal();
+                }
+            });
         });
-
-        // Render calendar on page load
-        document.addEventListener('DOMContentLoaded', renderCalendar);
     </script>
 </body>
 </html>
